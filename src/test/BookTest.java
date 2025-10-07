@@ -63,7 +63,6 @@ public class BookTest {
         assertThrows(IllegalStateException.class, () -> {
             // ยืมหนังสือเล่มที่ 3 ซ้ำต้อง throws exception ออกมา
             this.book3.borrow();
-            System.out.println("หนังสือ " + this.book1.getTitle() + " กำลังถูกยืมอยู่ยังไม่สามรถยืมหนังสือเล่มนี้ได้!");
         });
 
         // ยืมหนังสือไปแล้วค่าต้องเป็น true

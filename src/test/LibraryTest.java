@@ -23,6 +23,8 @@ public class LibraryTest {
 
     @Test
     public void addBook() {
+        // ตรวจสอบว่าหนังสือใน library ไม่มีหนังสืออยู่
+        assertEquals(0, library.getBooks().size());
         // เพิ่มหนังสือเล่มที่ 1 และ 2 เข้าไปใน library
         library.addBook(book1);
         library.addBook(book2);
@@ -45,6 +47,13 @@ public class LibraryTest {
         member.borrowBook(book1);
         // ยืม book2
         assertNotNull(library.borrowBook("book2", member));
+        try {
+            // เกิด exception ขึ้นเพราะยืมหนังสือที่ไมมีอยู่จริงในห้องสมุด
+            library.borrowBook("book953", new Member("a"));
+        } catch(IllegalStateException e){
+            // เชึคข้อความ exception
+            assertEquals("Book not available", e.getMessage());
+        }
     }
 
     @Test
@@ -63,7 +72,7 @@ public class LibraryTest {
 
     @Test
     public void getAvailableBookCount() {
-        // ตรวจสอบหังสือใ library ที่ใช้งาได้ตอนเริ่มต้นจะมีแค่ 0 เล่ม
+        // ตรวจสอบหนังสือใน library ที่ใช้งาได้ตอนเริ่มต้นจะมีแค่ 0 เล่ม
         assertEquals(0, library.getAvailableBookCount());
         // เพิ่มหนังสือเข้าไป 2 เล่ม
         library.addBook(new Book("book1", "A"));
