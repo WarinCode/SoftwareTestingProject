@@ -33,8 +33,8 @@ public class TaskManagerTest {
 
     @Test
     public void findUser() {
-        // ตรวจสอบว่าเป็น null หรือไม่ taskmanager ตอนเริ่มเป็แค่ List เปล่าๆไม่มี user เพราะฉะนั้นค่าที่ออกมาตั้งเป็น null
-        assertNull(null,taskmanager.findUser("user1"));
+        // ตรวจสอบว่าเป็น null หรือไม่ taskmanager ตอนเริ่มเป็นแค่ List เปล่าๆไม่มี user เพราะฉะนั้นค่าที่ออกมาตั้งเป็น null
+        assertNull(taskmanager.findUser("user1"));
         // เพิ่ม user เข้าไป
         taskmanager.addUser(user);
         // หา user1 เจอแล้วคเพราะถูกเพิ่มเข้าไปค่าจึงไม่เป็น null แต่เป็ object ของ user1
