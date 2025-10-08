@@ -1,0 +1,314 @@
+{
+	"info": {
+		"_postman_id": "5e8b88fe-8774-42e7-b474-b3f9e8fcdae1",
+		"name": "Fake Store API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "32810593",
+		"_collection_link": "https://testers-7442.postman.co/workspace/Testers~f699d350-d696-4a71-81fd-9b1d08320a91/collection/32810593-5e8b88fe-8774-42e7-b474-b3f9e8fcdae1?action=share&source=collection_link&creator=32810593"
+	},
+	"item": [
+		{
+			"name": "Products",
+			"item": [
+				{
+					"name": "Get all products",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"ตรวจสอบสถานะ response ตอบกลับมาเป็นสถานะ 200\", function () {",
+									"    pm.expect(pm.response.code).to.equal(200);",
+									"});",
+									"",
+									"pm.test(\"ตรวจสอบ headers ว่ามี Content-Type\", function () {",
+									"    pm.response.to.have.header(\"Content-Type\");",
+									"});",
+									"",
+									"pm.test(\"ตรวจสอบข้อมูล response มาว่าเก็บข้อมูลเป็น array\", function () {",
+									"    const responseData = pm.response.json();",
+									"    pm.expect(responseData).to.be.an('array');",
+									"});",
+									"",
+									"pm.test(\"ตรวจสอบข้อมูลใน objects ว่ามี properties ครบ\", function () {",
+									"    const responseData = pm.response.json();",
+									"    responseData.forEach((product) => {",
+									"        pm.expect(product).to.have.property('id');",
+									"        pm.expect(product).to.have.property('title');",
+									"        pm.expect(product).to.have.property('price');",
+									"        pm.expect(product).to.have.property('description');",
+									"        pm.expect(product).to.have.property('category');",
+									"        pm.expect(product).to.have.property('image');",
+									"        pm.expect(product).to.have.property('rating');",
+									"    });",
+									"});",
+									"",
+									"",
+									"",
+									"",
+									"// pm.test(\"Price is a non-negative number\", function () {",
+									"//     const responseData = pm.response.json();",
+									"    ",
+									"//     pm.expect(responseData).to.be.an('array');",
+									"//     responseData.forEach(product => {",
+									"//         pm.expect(product.price).to.be.a('number').and.to.be.at.least(0, \"Price should be non-negative\");",
+									"//     });",
+									"// });",
+									"",
+									"",
+									"// pm.test(\"Rating is an object containing valid rate and count\", function () {",
+									"//     const responseData = pm.response.json();",
+									"    ",
+									"//     responseData.forEach(product => {",
+									"//         pm.expect(product).to.have.property('rating').that.is.an('object');",
+									"//         pm.expect(product.rating).to.have.property('rate').that.is.a('number').that.is.at.least(0).and.is.at.most(5);",
+									"//         pm.expect(product.rating).to.have.property('count').that.is.a('number').that.is.at.least(0);",
+									"//     });",
+									"// });"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"method": "GET",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\": 1,\r\n  \"title\": \"string\",\r\n  \"price\": 0.1,\r\n  \"description\": \"string\",\r\n  \"category\": \"string\",\r\n  \"image\": \"http://example.com\"\r\n}"
+						},
+						"url": {
+							"raw": "{{base_url}}/products",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"products"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Get a single product",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"ตรวจสอบสถานะ response เป็น 200\", function () {",
+									"    pm.expect(pm.response.code).to.equal(200);",
+									"});",
+									"",
+									"",
+									"pm.test(\"ตรวจสอบ headers ว่าส่วน Content-Type มีค่า value เป็น application/json\", function () {",
+									"    pm.expect(pm.response.headers.get('Content-Type')).to.include('application/json');",
+									"});",
+									"",
+									"",
+									"pm.test(\"ตรวจสอบข้อมูลที่ response กลับมาเป็น object\", function () {",
+									"    const responseData = pm.response.json();",
+									"    pm.expect(responseData).to.be.an('object');",
+									"});",
+									"",
+									"",
+									"pm.test(\"ตรวจสอบชนิดของ properties ว่าชนิดที่ response กลับมาถูกต้องไหม\", function () {",
+									"    const { id, title, price, description, category, image, rating: { rate, count } } = pm.response.json();",
+									"    ",
+									"    pm.expect(id).to.be.a('number')",
+									"    pm.expect(title).to.be.a('string')",
+									"    pm.expect(price).to.be.a('number');",
+									"    pm.expect(description).to.be.a('string');",
+									"    pm.expect(category).to.be.a('string');",
+									"    pm.expect(image).to.be.a('string');",
+									"    pm.expect(rate).to.be.a('number');",
+									"    pm.expect(count).to.be.a('number');",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/products/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"products",
+								"1"
+							],
+							"query": [
+								{
+									"key": null,
+									"value": "",
+									"disabled": true
+								}
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Add a new product",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"ตรวจสอบสถานะ response คืนกลับมาเป็น 201\", function () {",
+									"    pm.expect(pm.response.code).to.equal(201);",
+									"});",
+									"",
+									"",
+									"pm.test(\"ตรวจสอบข้อมูลที่ได้รับจาก response\", function () {",
+									"    const { title, price, description, image, category } = pm.response.json();",
+									"    ",
+									"    pm.expect(title).to.equal(\"foo bar\");",
+									"    pm.expect(price).to.equal(350);",
+									"    pm.expect(description).to.equal(\"abcde\");",
+									"    pm.expect(image).to.equal(null);",
+									"    pm.expect(category).to.equal(\"book\");",
+									"});",
+									"",
+									"pm.test(\"ตรวจสอบ response time ต้องน้อยกว่า 100ms\", function () {",
+									"    pm.expect(pm.response.responseTime).to.be.below(100);",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\": 1,\r\n  \"title\": \"foo bar\",\r\n  \"price\": 350,\r\n  \"description\": \"abcde\",\r\n  \"category\": \"book\",\r\n  \"image\": null\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/products",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"products"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Update a product",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"ตรวจสอบสถานะ repsonse ต้องตอบกลับมาเป็นสถานะ 200\", function () {",
+									"    pm.expect(pm.response.code).to.equal(200);",
+									"});",
+									"",
+									"",
+									"pm.test(\"ตรวจสอบข้อมูลที่ response กลับมาเป็น object\", function () {",
+									"    const responseData = pm.response.json();",
+									"    pm.expect(responseData).to.be.an('object');",
+									"});",
+									"",
+									"",
+									"pm.test(\"ตรวจสอบข้อมูลที่ response กลับมามี properties ครบหรือไม่\", function () {",
+									"    const responseData = pm.response.json();",
+									"    pm.expect(responseData).to.have.all.keys(['id', 'title', 'price', 'description', 'image', 'category']);",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "PUT",
+						"header": [],
+						"body": {
+							"mode": "raw",
+							"raw": "{\r\n  \"id\": 1,\r\n  \"title\": \"string\",\r\n  \"price\": 0.1,\r\n  \"description\": \"string\",\r\n  \"category\": \"string\",\r\n  \"image\": \"http://example.com\"\r\n}",
+							"options": {
+								"raw": {
+									"language": "json"
+								}
+							}
+						},
+						"url": {
+							"raw": "{{base_url}}/products/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"products",
+								"1"
+							]
+						}
+					},
+					"response": []
+				},
+				{
+					"name": "Delete a product",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"pm.test(\"ตรวจสอบค่าสถานะ response คืนกลับมาเป็น 200\", function () {",
+									"    pm.expect(pm.response.code).to.eql(200);",
+									"});",
+									"",
+									"",
+									"pm.test(\"ตรวจสอบข้อมูลใน object ต้องไม่เป็น object ว่าง\", function () {",
+									"    const responseData = pm.response.json();",
+									"    pm.expect(responseData).to.not.empty;",
+									"});"
+								],
+								"type": "text/javascript",
+								"packages": {},
+								"requests": {}
+							}
+						}
+					],
+					"request": {
+						"method": "DELETE",
+						"header": [],
+						"url": {
+							"raw": "{{base_url}}/products/1",
+							"host": [
+								"{{base_url}}"
+							],
+							"path": [
+								"products",
+								"1"
+							]
+						}
+					},
+					"response": []
+				}
+			]
+		}
+	]
+}
