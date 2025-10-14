@@ -5,6 +5,7 @@
 [![wakatime](https://wakatime.com/badge/user/68e3e2dc-451c-45ef-bca8-9fc3ad60e2f9/project/25e11e2d-c51d-4137-bdc4-5235fbf92c25.svg)](https://wakatime.com/badge/user/68e3e2dc-451c-45ef-bca8-9fc3ad60e2f9/project/25e11e2d-c51d-4137-bdc4-5235fbf92c25)
 ![Java](https://img.shields.io/badge/java-%23ED8B00.svg?style=for-the-badge&logo=openjdk&logoColor=white)
 ![Maven](https://img.shields.io/badge/apachemaven-C71A36.svg?style=for-the-badge&logo=apachemaven&logoColor=white)
+![IntelliJ IDEA](https://img.shields.io/badge/IntelliJIDEA-000000.svg?style=for-the-badge&logo=intellij-idea&logoColor=white)
 
 ### รายละเอียดโปรเจค
 โปรเจคนี้ทำเกี่ยวกับการทดสอบโปรแกรม Java ทั้งหมดด้วยกัน 2 โปรแกรมโดยใช้เครื่องมือในการทดสอบ Framework อย่าง
